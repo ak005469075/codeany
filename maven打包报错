@@ -1,0 +1,92 @@
+maven安装 https://zhuanlan.zhihu.com/p/402334770 （用来编译jar包的）
+
+使用命令安装完就可以了 `apt-get install maven`，mvn -version证明安装成功
+
+镜像配置问题
+
+```xml
+ <mirror>
+    <id>aliyun</id>
+    <url>http://maven.aliyun.com/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>central</id>
+    <url>https://repo1.maven.org/maven2/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>netease</id>
+    <url>http://maven.netease.com/repository/public/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>huaweicloud</id>
+    <url>https://repo.huaweicloud.com/repository/maven/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>tencent</id>
+    <url>https://mirrors.cloud.tencent.com/repository/maven/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>ustc</id>
+    <url>http://mirrors.ustc.edu.cn/maven/maven2/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>nju</id>
+    <url>http://maven.nju.edu.cn/repository/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>tsinghua</id>
+    <url>https://repo.maven.apache.org/maven2/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>bit</id>
+    <url>http://mirror.bit.edu.cn/maven/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>neusoft</id>
+    <url>https://mirrors.neusoft.edu.cn/maven2/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>opencas</id>
+    <url>http://maven.opencas.cn/maven/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+  <mirror>
+    <id>bjtu</id>
+    <url>http://maven.bjtu.edu.cn/maven2/</url>
+    <mirrorOf>central</mirrorOf>
+  </mirror>
+
+————————————————
+
+版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。                
+原文链接：https://blog.csdn.net/qq_38217990/article/details/129257106
+```
+
+如果 ` unexpected markup <!d (position: START_DOCUMENT seen \r\n<!d... @2:4)`：
+
+就将aliyun仓库删掉，一开始没用，我发现还是从aliyun上下载的，搜索了一阵，
+
+原来要更换的仓库是在**.m2下的那个settings.xml**，而不是mvn -version后给的mvn位置中config的settings.xml
+
+`Remote host terminated the handshake: SSL peer shut down incorrectly`：
+
+
+老提示父pom不存在、或提示某jar文件不存在
+
+就要通过https://igniterealtime.org/archiva/repository/maven/org/gnu/inet/libidn/1.35/访问文件的方式，确认仓库名是否正确，是否包含目标文件
+
+主要是确认好m2/settings.xml的镜像
+
+还要确认项目的pom.xml中提到的仓库
+
+根据报错信息，即时访问仓库，是否包含对应文件
